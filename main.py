@@ -123,6 +123,7 @@ def process_pokemon(
     db: PokemonDatabase,
     show_image: bool = False,
     force: bool = False,
+    temperature: float = 0.5,
 ) -> None:
     """
     Process a single Pokémon: generate nicknames and store them in the database.
@@ -172,7 +173,7 @@ def process_pokemon(
             progress.add_task(pokemon_name.capitalize(), total=None)
 
             # Generate nicknames
-            nicknames = get_nicknames(pokemon_name)
+            nicknames = get_nicknames(pokemon_name, temperature)
 
         # Store in database
         db.add_pokemon_with_nicknames(pokemon_name, nicknames)
@@ -244,6 +245,9 @@ def generate(
         "-f",
         help="Force regeneration of nicknames even if they already exist",
     ),
+    temperature: float = typer.Option(
+        0.5, "--temperature", "-t", help="Temperature for the nickname generator"
+    ),
 ):
     """Generate nicknames for a Pokémon or all Pokémon."""
     load_environment()
@@ -266,7 +270,7 @@ def generate(
             )
             return
 
-        process_pokemon(pokemon_name, db, show_image, force)
+        process_pokemon(pokemon_name, db, show_image, force, temperature)
     else:
         # Process all Pokémon
         pokemon_list = get_pokemon_list()

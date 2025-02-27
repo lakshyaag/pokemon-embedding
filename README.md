@@ -7,14 +7,15 @@ This project uses OpenAI's GPT-4o model to generate nicknames for Pokémon sprit
 1. Clone this repository
 2. Install the required dependencies using uv:
 
-"""
+```bash
 uv sync
-"""
+```
+
 3. Create a `.env` file in the root directory with your OpenAI API key:
 
-"""
+```plaintext
 OPENAI_API_KEY=your_api_key_here
-"""
+```
 
 ## Usage
 
@@ -22,54 +23,53 @@ OPENAI_API_KEY=your_api_key_here
 
 The application uses Typer to provide a modern command-line interface with rich output formatting:
 
-"""
+```bash
+# List all available Pokémon
 
-### List all available Pokémon
+uv run main.py list-pokemon
 
-python main.py list-pokemon
+# Generate nicknames for a specific Pokémon
 
-### Generate nicknames for a specific Pokémon
+uv run main.py generate pikachu
 
-python main.py generate pikachu
+# Generate nicknames for a specific Pokémon and display the image
 
-### Generate nicknames for a specific Pokémon and display the image
+uv run main.py generate pikachu --show-image
 
-python main.py generate pikachu --show-image
+# View nicknames for a specific Pokémon
 
-### View nicknames for a specific Pokémon
+uv run main.py view pikachu
 
-python main.py view pikachu
+# Generate nicknames for all Pokémon
 
-### Generate nicknames for all Pokémon
+uv run main.py generate
 
-python main.py generate
+# Force regeneration of nicknames even if they already exist
 
-### Force regeneration of nicknames even if they already exist
+uv run main.py generate pikachu --force
 
-python main.py generate pikachu --force
+# Generate nicknames for all Pokémon and force regeneration
 
-### Generate nicknames for all Pokémon and force regeneration
+uv run main.py generate --force
 
-python main.py generate --force
+# Export the database to a CSV file
 
-### Export the database to a CSV file
+uv run main.py export
 
-python main.py export
+# Export the database to a custom CSV file
 
-### Export the database to a custom CSV file
-
-python main.py export custom_output.csv
-"""
+uv run main.py export custom_output.csv
+```
 
 ### Database
 
 The nicknames are stored in a SQLite database (`pokemon_nicknames.db` by default). You can specify a different database file using the `--db` option:
 
-"""
+```bash
 uv run main.py generate --db custom_database.db
 uv run main.py view pikachu --db custom_database.db
 uv run main.py export --db custom_database.db
-"""
+```
 
 ## Project Structure
 
@@ -82,11 +82,3 @@ uv run main.py export --db custom_database.db
 
 - Python 3.8+
 - OpenAI API key
-- Required Python packages:
-  - langchain-openai
-  - langchain-core
-  - pillow
-  - pydantic
-  - python-dotenv
-  - typer
-  - rich
