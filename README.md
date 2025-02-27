@@ -82,3 +82,9 @@ uv run main.py export --db custom_database.db
 
 - Python 3.8+
 - OpenAI API key
+
+## Credits
+  
+- Danny-E 33 + FroggestSpirit's full color patch
+- [PokeBase](https://github.com/PokeAPI/pokebase)
+- [Claude Plays Pokemon](https://www.twitch.tv/claudeplayspokemon)
